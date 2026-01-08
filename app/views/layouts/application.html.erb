@@ -18,20 +18,73 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <%# Bootstrap 5 CSS %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <%# Bootstrap Icons %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <nav>
-      <%= link_to "Home", root_path %>
-      <%= button_to "Log out", session_path, method: :delete if authenticated? %>
+    <%# Bootstrap Navbar %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <%= link_to "Store", root_path, class: "navbar-brand" %>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <%= link_to "Products", root_path, class: "nav-link" %>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav">
+            <% if authenticated? %>
+              <li class="nav-item">
+                <%= button_to "Log out", session_path, method: :delete, class: "btn btn-outline-light", data: { turbo: false } %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Login", new_session_path, class: "btn btn-outline-light" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     </nav>
 
-    <main>
+    <%# Flash Messages %>
+    <% if notice.present? %>
+      <div class="container mt-3">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= notice %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    <% end %>
+
+    <% if alert.present? %>
+      <div class="container mt-3">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= alert %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+    <% end %>
+
+    <%# Main Content %>
+    <main class="container my-4">
       <%= yield %>
     </main>
 
+    <%# Bootstrap 5 JavaScript Bundle with Popper %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -1,11 +1,45 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+<div class="row justify-content-center">
+  <div class="col-lg-4 col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h2 class="mb-0">
+          <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+        </h2>
+      </div>
+      <div class="card-body">
+        <%= form_with url: session_path do |form| %>
+          <%# Email Field %>
+          <div class="mb-3">
+            <%= form.label :email_address, "Email Address", class: "form-label" %>
+            <%= form.email_field :email_address,
+                required: true,
+                autofocus: true,
+                autocomplete: "username",
+                placeholder: "Enter your email address",
+                value: params[:email_address],
+                class: "form-control" %>
+          </div>
 
-<%= form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
-  <%= form.submit "Sign in" %>
-<% end %>
-<br>
+          <%# Password Field %>
+          <div class="mb-3">
+            <%= form.label :password, "Password", class: "form-label" %>
+            <%= form.password_field :password,
+                required: true,
+                autocomplete: "current-password",
+                placeholder: "Enter your password",
+                maxlength: 72,
+                class: "form-control" %>
+          </div>
 
-<%= link_to "Forgot password?", new_password_path %>
+          <%# Submit Button %>
+          <%= form.submit "Sign in", class: "btn btn-primary w-100" %>
+        <% end %>
+
+        <%# Forgot Password Link %>
+        <div class="text-center mt-3">
+          <%= link_to "Forgot password?", new_password_path, class: "text-muted" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

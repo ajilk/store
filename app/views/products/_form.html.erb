@@ -1,14 +1,25 @@
 <%= form_with model: product do |form| %>
+  <%# Error Messages %>
   <% if form.object.errors.any? %>
-    <p class="error"><%= form.object.errors.full_messages.first %></p>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <i class="bi bi-exclamation-triangle me-2"></i>
+      <%= form.object.errors.full_messages.first %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
   <% end %>
 
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <%# Name Field %>
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Enter product name" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <%# Submit Button %>
+  <div class="d-flex gap-2">
+    <%= form.submit class: "btn btn-primary" do %>
+      <i class="bi bi-check-circle me-2"></i><%= form.object.new_record? ? "Create Product" : "Update Product" %>
+    <% end %>
+
+    <%= link_to "Cancel", products_path, class: "btn btn-secondary" %>
   </div>
 <% end %>
