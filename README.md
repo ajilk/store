@@ -1,24 +1,84 @@
-# README
+# Store
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A modern product management application built with Rails 8 and Bootstrap 5.
 
-Things you may want to cover:
+## Quick Start
 
-* Ruby version
+```bash
+# Install dependencies
+bundle install
 
-* System dependencies
+# Setup database
+bin/rails db:setup
 
-* Configuration
+# Start server
+bin/rails server
+```
 
-* Database creation
+Visit `http://localhost:3000`
 
-* Database initialization
+## Test Login
 
-* How to run the test suite
+**Email:** test@gmail.com
+**Password:** test
 
-* Services (job queues, cache servers, search engines, etc.)
+## Features
 
-* Deployment instructions
+- Modern Bootstrap 5 UI with responsive design
+- Product CRUD operations (Create, Read, Update, Delete)
+- User authentication with session management
+- Password reset functionality
+- Public product browsing, authenticated product management
 
-* ...
+## Screenshots
+
+### Home Page (Unauthenticated)
+![Home Page - Unauthenticated](doc/screenshots/store_home_unauthenticated.png)
+
+---
+
+### Login Page
+![Login Page](doc/screenshots/store_login.png)
+
+---
+
+### Home Page (Authenticated)
+![Home Page - Authenticated](doc/screenshots/store_home_authenticated.png)
+
+---
+
+### Product Details
+![Product Details](doc/screenshots/store_product_details_unauthenticated.png)
+
+---
+
+### New Product
+![New Product](doc/screenshots/store_product_new.png)
+
+---
+
+### Edit Product
+![Edit Product](doc/screenshots/store_product_edit.png)
+
+## Tech Stack
+
+- **Ruby:** 4.0.0
+- **Rails:** 8.1.1
+- **Database:** SQLite3
+- **Frontend:** Bootstrap 5, Hotwire (Turbo + Stimulus)
+- **Authentication:** Rails 8 built-in authentication
+
+## Development
+
+```bash
+# Run tests
+bin/rails test
+
+# Run code quality checks
+bin/rubocop
+bin/brakeman
+
+# Database operations
+bin/rails db:migrate
+bin/rails db:reset
+```
